@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Stripe Theme Colors -->
+    <color name="stripe_primary_color">#E91E63</color>
+    <color name="stripe_primary_variant_color">#AD1457</color>
+    <color name="stripe_secondary_color">#E879A6</color>
+    <color name="stripe_secondary_variant_color">#C2185B</color>
+</resources>

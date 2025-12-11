@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PathwayBScreen extends StatelessWidget {
   const PathwayBScreen({super.key});
@@ -97,8 +98,11 @@ class PathwayBScreen extends StatelessWidget {
               width: double.infinity,
               height: 48,
               child: ElevatedButton(
-                onPressed: () {
-                  // Handle file a claim
+                onPressed: () async {
+                  final url = Uri.parse('https://www.va.gov/disability/how-to-file-claim/');
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFE91E63),

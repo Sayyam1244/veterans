@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "701180234225",
+    "project_id": "veterann",
+    "storage_bucket": "veterann.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701180234225:android:fe8dd1d9a6798611265c50",
+        "android_client_info": {
+          "package_name": "com.example.veteranns"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVTly7VPB6jZTtmk2kJYKp9ywldj6jj8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

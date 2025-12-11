@@ -1,14 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'pathway_a_pre_screen.dart';
-import 'pathway_a_post_screen.dart';
+import 'pathway_a_screen.dart';
 import 'pathway_b_screen.dart';
 import 'pathway_c_screen.dart';
 import 'pathway_d_screen.dart';
 import 'pathway_e_screen.dart';
+import 'notifications_screen.dart';
+import '../services/notification_service.dart';
+import '../services/location_service.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final NotificationService _notificationService = NotificationService();
+  final LocationService _locationService = LocationService();
+
+  @override
+  void initState() {
+    super.initState();
+    _updateUserLocation();
+  }
+
+  Future<void> _updateUserLocation() async {
+    try {
+      await _locationService.updateUserLocation();
+    } catch (e) {
+      // Silently handle location errors - don't disrupt user experience
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +49,49 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Image.asset(
                     'assets/images/logo.png', // Replace with your logo asset
-
                     width: 140,
                   ),
-                  const Icon(Icons.notifications_outlined, size: 24),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+                      );
+                    },
+                    child: StreamBuilder<int>(
+                      stream: _notificationService.getUnreadNotificationsCount(),
+                      builder: (context, snapshot) {
+                        final unreadCount = snapshot.data ?? 0;
+                        return Stack(
+                          children: [
+                            const Icon(Icons.notifications_outlined, size: 24),
+                            if (unreadCount > 0)
+                              Positioned(
+                                right: 0,
+                                top: 0,
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFE91E63),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                                  child: Text(
+                                    unreadCount > 99 ? '99+' : unreadCount.toString(),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
 
@@ -55,7 +117,7 @@ class HomeScreen extends StatelessWidget {
                       'assets/images/homeImage1.png',
                       () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const PathwayAPreScreen()),
+                        MaterialPageRoute(builder: (context) => const PathwayAScreen()),
                       ),
                     ),
 

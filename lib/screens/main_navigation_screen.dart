@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:veteranns/screens/home_screen.dart';
 import 'resources_screen.dart';
+import 'documents_screen.dart';
 import 'chats_screen.dart';
 import 'settings_screen.dart';
 import 'profile_screen.dart';
@@ -19,6 +20,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const ResourcesScreen(),
+    const DocumentsScreen(),
     const ChatsScreen(),
     const SettingsScreen(),
     const ProfileScreen(),
@@ -39,9 +41,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           children: [
             _buildBottomNavItem('assets/icons/home.svg', 'Home', 0),
             _buildBottomNavItem('assets/icons/page.svg', 'Resources', 1),
-            _buildBottomNavItem('assets/icons/chat.svg', 'Chat', 2),
-            _buildBottomNavItem('assets/icons/setting.svg', 'Settings', 3),
-            _buildBottomNavItem('assets/icons/profile.svg', 'Profile', 4),
+            _buildBottomNavItem('assets/icons/doc.svg', 'Documents', 2),
+            _buildBottomNavItem('assets/icons/chat.svg', 'Chat', 3),
+            _buildBottomNavItem('assets/icons/setting.svg', 'Settings', 4),
+            _buildBottomNavItem('assets/icons/profile.svg', 'Profile', 5),
           ],
         ),
       ),
