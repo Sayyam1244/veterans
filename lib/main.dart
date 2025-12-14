@@ -13,7 +13,7 @@ import 'services/subscription_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   log('Initializing Firebase');
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   log('Firebase initialized');
   // Initialize Stripe
   SubscriptionService.initializeStripe();
@@ -46,21 +46,9 @@ class AuthWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        // Show loading while checking auth state
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            backgroundColor: Colors.white,
-            body: Center(
-              child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFE91E63))),
-            ),
-          );
-        }
-
-        // If user is signed in, go to main app
-        if (snapshot.hasData && snapshot.data != null) {
+    return Builder(
+      builder: (context) {
+        if (FirebaseAuth.instance.currentUser != null) {
           return const MainNavigationScreen();
         }
 

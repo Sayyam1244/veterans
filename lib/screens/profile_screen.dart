@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:veteranns/screens/welcome_screen.dart';
 import '../services/auth_service.dart';
 import '../services/loading_service.dart';
 import '../services/snackbar_service.dart';
@@ -146,6 +147,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       LoadingService.show(context, message: 'Signing out...');
       await _authService.signOut();
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+        (route) => false,
+      );
       LoadingService.hide();
 
       if (mounted) {
@@ -309,7 +315,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     // Notification Summary
                     const NotificationSummaryWidget(),
                     const SizedBox(height: 16),
-                    
+
                     _buildMenuItem('Personal Information', Icons.person_outline, () {
                       Navigator.push(
                         context,
