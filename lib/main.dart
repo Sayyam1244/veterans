@@ -16,7 +16,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   log('Firebase initialized');
   // Initialize Stripe
-  SubscriptionService.initializeStripe();
+  await SubscriptionService.initializeStripe();
   log('Stripe initialized');
   // Initialize notification service
   await NotificationService().initialize();

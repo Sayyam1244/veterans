@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../services/subscription_service.dart';
 import 'subscription_screen.dart';
 
@@ -122,6 +123,31 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                       showCallIcon: true,
                     ),
                     _buildResourceItem(
+                      'Books',
+                      'Explore recommended books and resources.',
+                      'assets/icons/book.svg',
+                      () async {
+                        const url = 'https://www.hegoldenbks.com/books/';
+                        if (await canLaunchUrl(Uri.parse(url))) {
+                          await launchUrl(Uri.parse(url));
+                        }
+                      },
+                      showCallIcon: false,
+                    ),
+                    // 24-Hour Chart Resource (Premium)
+                    _buildResourceItem(
+                      '24-Hour Chart',
+                      'Access the chart tab or contact via link below.',
+                      'assets/icons/chart.svg',
+                      () async {
+                        const url = 'https://www.hegoldenbks.com/contact/';
+                        if (await canLaunchUrl(Uri.parse(url))) {
+                          await launchUrl(Uri.parse(url));
+                        }
+                      },
+                      showCallIcon: false,
+                    ),
+                    _buildResourceItem(
                       'LifePath/MHMR',
                       'https://www.collincountytx.gov\n1-972-562-0080',
                       'assets/icons/heart.svg',
@@ -228,6 +254,18 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                       'assets/icons/sheildCheck.svg',
                       () {},
                       showCallIcon: true,
+                    ),
+                    _buildResourceItem(
+                      'Disability Services Website',
+                      'Visit for disability support and services.',
+                      'assets/icons/sheildCheck.svg',
+                      () async {
+                        const url = 'https://www.hegoldenbks.com/';
+                        if (await canLaunchUrl(Uri.parse(url))) {
+                          await launchUrl(Uri.parse(url));
+                        }
+                      },
+                      showCallIcon: false,
                     ),
                     _buildResourceItem(
                       'National Organization of Social Security Claimants',
@@ -357,7 +395,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Get access to complete veteran resources including legal aid, housing assistance, and more.',
+                  'Get access to complete veteran resources including legal aid, housing assistance, 24-hour chart call, and more. Payment section refers to Stripe account for subscription.',
                   style: TextStyle(fontSize: 14, color: Colors.white, height: 1.3),
                 ),
                 const SizedBox(height: 12),
@@ -378,7 +416,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),
                   child: const Text(
-                    'Upgrade Now - \$19.99/month',
+                    'Upgrade Now - \$25.00/month',
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -508,7 +546,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     ),
                     child: const Text(
-                      'Unlock This Section - \$19.99/month',
+                      'Unlock This Section - \$25.00/month',
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                     ),
                   ),

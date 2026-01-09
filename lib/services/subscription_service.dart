@@ -15,7 +15,8 @@ class SubscriptionService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // Initialize Stripe (call this in main.dart)
-  static void initializeStripe() {
+  static Future<void> initializeStripe() async {
+    await StripeConfig.loadKeysFromRemoteConfig();
     Stripe.publishableKey = StripeConfig.publishableKey;
   }
 

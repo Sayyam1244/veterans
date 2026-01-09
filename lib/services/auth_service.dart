@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'scheduled_notification_manager.dart';
@@ -157,6 +159,7 @@ class AuthService {
       }
       return false;
     } catch (e) {
+      log('Error updating user data: $e');
       return false;
     }
   }

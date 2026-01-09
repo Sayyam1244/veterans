@@ -19,7 +19,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     {
       'id': 'monthly',
       'title': 'Monthly Premium',
-      'price': '19.99',
+      'price': '25.00',
       'period': 'month',
       'description': 'Full access to all resources and features',
       'features': [

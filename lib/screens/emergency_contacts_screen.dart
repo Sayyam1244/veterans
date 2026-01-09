@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import '../services/loading_service.dart';
@@ -44,7 +45,7 @@ class _EmergencyContactsScreenState extends State<EmergencyContactsScreen> {
     try {
       LoadingService.show(context, message: 'Saving contacts...');
 
-      final updatedData = {'emergencyContacts': _emergencyContacts};
+      final updatedData = {'emergencyContacts': FieldValue.arrayUnion(_emergencyContacts)};
 
       final success = await _authService.updateUserData(updatedData);
       LoadingService.hide();

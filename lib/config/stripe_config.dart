@@ -1,16 +1,19 @@
+import 'dart:developer';
+
+import 'stripe_remote_config.dart';
+
 class StripeConfig {
-  // Production Stripe Keys
-  static const String publishableKey =
-      'pk_live_51SG1yGP5mHW8t9OZfN7o1XLnK78qLQmA0Hd1zp2ChK4LNb6ruYeaSmXwnU88VrlEm8CyhuVb8WIeYDHIrEvjCVY500CXUtn33L';
-  static const String secretKey =
-      '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';
+  static String publishableKey = '';
+  static String secretKey = '';
 
-  // Test mode - set to false for production
   static const bool isTestMode = false;
-
-  // Subscription plans
-  static const Map<String, String> planPrices = {'monthly': '19.99', 'yearly': '199.99'};
-
-  // Currency
+  static const Map<String, String> planPrices = {'monthly': '25.00', 'yearly': '299.99'};
   static const String currency = 'usd';
+
+  static Future<void> loadKeysFromRemoteConfig() async {
+    final keys = await StripeRemoteConfig.fetchStripeKeys();
+    log('Fetched Stripe keys from Remote Config: $keys');
+    if (keys['publishableKey']?.isNotEmpty ?? false) publishableKey = keys['publishableKey']!;
+    if (keys['secretKey']?.isNotEmpty ?? false) secretKey = keys['secretKey']!;
+  }
 }
